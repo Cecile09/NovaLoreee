@@ -1,0 +1,167 @@
+<h2>Organização dos Livros</h2>
+
+<p>
+    Utilize os filtros e altere o status dos livros
+    para facilitar a organização.
+</p>
+
+
+<h3>Filtrar</h3>
+
+<form
+    method="GET"
+    action="/admin/livros"
+>
+
+    <select name="status">
+
+        <option value="">
+            Todos
+        </option>
+
+        <option
+            value="PENDENTE"
+            {{#if (eq statusSelecionado "PENDENTE")}}
+                selected
+            {{/if}}
+        >
+            Pendente
+        </option>
+
+        <option
+            value="EM_ANALISE"
+            {{#if (eq statusSelecionado "EM_ANALISE")}}
+                selected
+            {{/if}}
+        >
+            Em análise
+        </option>
+
+        <option
+            value="APROVADO"
+            {{#if (eq statusSelecionado "APROVADO")}}
+                selected
+            {{/if}}
+        >
+            Aprovado
+        </option>
+
+        <option
+            value="REJEITADO"
+            {{#if (eq statusSelecionado "REJEITADO")}}
+                selected
+            {{/if}}
+        >
+            Rejeitado
+        </option>
+
+        <option
+            value="ORGANIZADO"
+            {{#if (eq statusSelecionado "ORGANIZADO")}}
+                selected
+            {{/if}}
+        >
+            Organizado
+        </option>
+
+    </select>
+
+    <button type="submit">
+        Filtrar
+    </button>
+
+</form>
+
+
+<hr>
+
+
+<table>
+
+    <thead>
+
+        <tr>
+
+            <th>Livro</th>
+            <th>Autor</th>
+            <th>Doador</th>
+            <th>Status</th>
+            <th>Alterar</th>
+
+        </tr>
+
+    </thead>
+
+
+    <tbody>
+
+        {{#each livros}}
+
+        <tr>
+
+            <td>
+                {{this.titulo}}
+            </td>
+
+            <td>
+                {{this.autor}}
+            </td>
+
+            <td>
+                {{this.usuario.nome}}
+            </td>
+
+            <td>
+
+                <span class="status {{this.status}}">
+                    {{this.status}}
+                </span>
+
+            </td>
+
+            <td>
+
+                <form
+                    method="POST"
+                    action="/admin/livros/{{this.id}}/status"
+                >
+
+                    <select name="status">
+
+                        <option value="PENDENTE">
+                            Pendente
+                        </option>
+
+                        <option value="EM_ANALISE">
+                            Em análise
+                        </option>
+
+                        <option value="APROVADO">
+                            Aprovado
+                        </option>
+
+                        <option value="REJEITADO">
+                            Rejeitado
+                        </option>
+
+                        <option value="ORGANIZADO">
+                            Organizado
+                        </option>
+
+                    </select>
+
+                    <button type="submit">
+                        Atualizar
+                    </button>
+
+                </form>
+
+            </td>
+
+        </tr>
+
+        {{/each}}
+
+    </tbody>
+
+</table>

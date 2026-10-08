@@ -1,0 +1,84 @@
+<h2>Cadastrar Livro Doado</h2>
+
+<form
+    method="POST"
+    action="/livros"
+>
+
+    <div>
+
+        <label>
+            Título:
+        </label>
+
+        <input
+            type="text"
+            name="titulo"
+            required
+        >
+
+    </div>
+
+
+    <div>
+
+        <label>
+            Autor:
+        </label>
+
+        <input
+            type="text"
+            name="autor"
+            required
+        >
+
+    </div>
+
+
+    <div>
+
+        <label>
+            Categoria:
+        </label>
+
+        <input
+            type="text"
+            name="categoria"
+        >
+
+    </div>
+
+
+    <div>
+
+        <label>
+            Doador:
+        </label>
+
+        <select
+            name="usuarioId"
+            required
+        >
+
+            {{#each usuarios}}
+
+            <option value="{{this.id}}">
+
+                {{this.nome}}
+                -
+                {{this.email}}
+
+            </option>
+
+            {{/each}}
+
+        </select>
+
+    </div>
+
+
+    <button type="submit">
+        Cadastrar doação
+    </button>
+
+</form>
